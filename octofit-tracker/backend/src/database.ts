@@ -1,9 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db'
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/octofit_db";
 
-export async function connectDatabase() {
-  return mongoose.connect(mongoUri)
+export async function connectDatabase(): Promise<void> {
+  await mongoose.connect(MONGO_URI);
+  console.log("Connected to MongoDB");
 }
 
-export default connectDatabase
+export default connectDatabase;
