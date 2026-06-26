@@ -5,9 +5,9 @@ function Workouts() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
-    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api'
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts`
+    : 'http://localhost:8000/api/workouts'
 
   const friendlyHost = import.meta.env.VITE_CODESPACE_NAME
     ? `${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
@@ -25,7 +25,6 @@ function Workouts() {
   }
 
   useEffect(() => {
-    const endpoint = `${apiBaseUrl}/workouts`
 
     fetch(endpoint)
       .then((response) => {

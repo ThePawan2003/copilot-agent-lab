@@ -5,9 +5,9 @@ function Activities() {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
-    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
-    : 'http://localhost:8000/api'
+  const endpoint = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities`
+    : 'http://localhost:8000/api/activities'
 
   const friendlyHost = import.meta.env.VITE_CODESPACE_NAME
     ? `${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
@@ -25,7 +25,6 @@ function Activities() {
   }
 
   useEffect(() => {
-    const endpoint = `${apiBaseUrl}/activities`
 
     fetch(endpoint)
       .then((response) => {
