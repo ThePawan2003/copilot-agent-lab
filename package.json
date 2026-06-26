@@ -1,0 +1,24 @@
+{
+  "name": "copilot-agent-lab",
+  "version": "1.0.0",
+  "description": "<img src=\"https://octodex.github.com/images/Professortocat_v2.png\" align=\"right\" height=\"200px\" />",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThePawan2003/copilot-agent-lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ThePawan2003/copilot-agent-lab/issues"
+  },
+  "homepage": "https://github.com/ThePawan2003/copilot-agent-lab#readme"
+}
