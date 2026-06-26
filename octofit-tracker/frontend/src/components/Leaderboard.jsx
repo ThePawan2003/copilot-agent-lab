@@ -1,13 +1,31 @@
 import { useEffect, useState } from 'react'
-import { API_BASE_URL, USE_CODESPACE_HOST, friendlyApiHost, normalizeApiResponse } from '../api.js'
 
 function Leaderboard() {
   const [leaders, setLeaders] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const apiBaseUrl = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
+    : 'http://localhost:8000/api'
+
+  const friendlyHost = import.meta.env.VITE_CODESPACE_NAME
+    ? `${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+    : 'localhost:8000'
+
+  const normalizeResponse = (payload) => {
+    if (!payload) return []
+    if (Array.isArray(payload)) return payload
+    if (typeof payload === 'object') {
+      if (Array.isArray(payload.data)) return payload.data
+      if (Array.isArray(payload.items)) return payload.items
+      if (Array.isArray(payload.results)) return payload.results
+    }
+    return []
+  }
+
   useEffect(() => {
-    const endpoint = `${API_BASE_URL}/leaderboard`
+    const endpoint = `${apiBaseUrl}/leaderboard`
 
     fetch(endpoint)
       .then((response) => {
@@ -16,7 +34,7 @@ function Leaderboard() {
         }
         return response.json()
       })
-      .then((payload) => setLeaders(normalizeApiResponse(payload)))
+      .then((payload) => setLeaders(normalizeResponse(payload)))
       .catch((fetchError) => setError(fetchError.message))
       .finally(() => setLoading(false))
   }, [])
@@ -26,9 +44,9 @@ function Leaderboard() {
       <h2 className="mb-4">Leaderboard</h2>
 
       <div className="alert alert-secondary">
-        API host: <strong>{friendlyApiHost()}</strong>
+        API host: <strong>{friendlyHost}</strong>
         <br />
-        {USE_CODESPACE_HOST
+        {import.meta.env.VITE_CODESPACE_NAME
           ? 'Using Codespaces endpoint with VITE_CODESPACE_NAME.'
           : 'VITE_CODESPACE_NAME is not set. Falling back to http://localhost:8000/api.'}
       </div>
